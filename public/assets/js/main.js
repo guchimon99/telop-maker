@@ -39,21 +39,6 @@
     }
   }
 
-  function measureTextWidth (fontFamily, fontWeight, fontSize, text) {
-    var div = document.createElement("div")
-    div.innerText = text
-    div.style.fontFamily = fontFamily
-    div.style.fontWeight = fontWeight
-    div.style.fontSize = fontSize + "px"
-    div.style.position = "fixed"
-    div.style.top = "100%"
-    div.style.visibility = "hidden"
-    document.body.appendChild(div)
-    var width = div.offsetWidth
-    div.remove()
-    return width
-  }
-
   function sceneListItemClickHandler(event) {
     var id = event.target.getAttribute("data-scene-id")
     var scene = scenes.find(function(scene){ return scene.id == id })
@@ -229,6 +214,21 @@
     ctx.textAlign = "center"
     ctx.fillStyle = COLOR_WHITE
     ctx.fillText(words, WIDTH / 2, HEIGHT - GUTTER - 20)
+  }
+
+  function measureTextWidth (fontFamily, fontWeight, fontSize, text) {
+    var div = document.createElement("div")
+    div.innerText = text
+    div.style.fontFamily = fontFamily
+    div.style.fontWeight = fontWeight
+    div.style.fontSize = fontSize + "px"
+    div.style.position = "fixed"
+    div.style.top = "100%"
+    div.style.visibility = "hidden"
+    document.body.appendChild(div)
+    var width = div.offsetWidth
+    div.remove()
+    return width
   }
 
   function init() {
