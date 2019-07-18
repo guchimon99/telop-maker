@@ -6,11 +6,49 @@
       COLOR_BLACK = "#000000",
       WIDTH = 1600,
       HEIGHT = 900,
-      GUTTER = 25,
+      GUTTER_Y = 40,
+      GUTTER_X = 50,
+      FONT_WEIGHT_NORMAL = "normal",
+      FONT_WEIGHT_BOLD = "bold",
+      TEXT_ALIGN_LEFT = "left",
+      TEXT_ALIGN_CENTER = "center",
       // FONT_FAMILY_SERIF = "'Noto Serif JP', serif",
       FONT_FAMILY_SANS_SERIF = "'Noto Sans JP', sans-serif",
+
+      TITLE_FONT_FAMILY = FONT_FAMILY_SANS_SERIF,
+      TITLE_FONT_WEIGHT = FONT_WEIGHT_BOLD,
       TITLE_FONT_SIZE = 50,
+      TITLE_LINE_HEIGHT = 1.2,
+      TITLE_FONT_COLOR = COLOR_WHITE,
+      TITLE_STROKE_COLOR = COLOR_BLACK,
+      TITLE_STROKE_WIDTH = 8,
+      TITLE_FONT = [TITLE_FONT_WEIGHT, TITLE_FONT_SIZE + "px",  TITLE_FONT_FAMILY].join(" "),
+      TITLE_TEXT_ALIGN = TEXT_ALIGN_LEFT,
+      TITLE_X = GUTTER_X,
+      TITLE_Y = GUTTER_Y + TITLE_FONT_SIZE,
+
+      SUBTITLE_FONT_FAMILY = FONT_FAMILY_SANS_SERIF,
+      SUBTITLE_FONT_WEIGHT = FONT_WEIGHT_NORMAL,
       SUBTITLE_FONT_SIZE = 32,
+      SUBTITLE_LINE_HEIGHT = 1.2,
+      SUBTITLE_FONT_COLOR = COLOR_BLACK,
+      SUBTITLE_BACKGROUND_COLOR = COLOR_WHITE,
+      SUBTITLE_FONT = [SUBTITLE_FONT_WEIGHT, SUBTITLE_FONT_SIZE + "px",  TITLE_FONT_FAMILY].join(" "),
+      SUBTITLE_TEXT_ALIGN = TEXT_ALIGN_LEFT,
+      SUBTITLE_PADDING = 16,
+
+      WORDS_FONT_FAMILY = FONT_FAMILY_SANS_SERIF,
+      WORDS_FONT_WEIGHT = FONT_WEIGHT_BOLD,
+      WORDS_FONT_SIZE = 80,
+      WORDS_LINE_HEIGHT = 1.2,
+      WORDS_FONT = [WORDS_FONT_WEIGHT, WORDS_FONT_SIZE + "px",  WORDS_FONT_FAMILY].join(" "),
+      WORDS_FONT_COLOR = COLOR_WHITE,
+      WORDS_OUTER_LINE_WIDTH = 20,
+      WORDS_OUTER_LINE_COLOR = COLOR_WHITE,
+      WORDS_INNER_LINE_WIDTH = 10,
+      WORDS_INNER_LINE_COLOR = COLOR_RED,
+      WORDS_TEXT_ALIGN = TEXT_ALIGN_CENTER,
+
       WORDS_FONT_SIZE = 80
 
   var canvas, ctx, scene, scenes, sceneList, sceneListItemTemplate,
@@ -179,41 +217,77 @@
   }
 
   function renderTitle(title) {
-    ctx.fillStyle = COLOR_WHITE
-    ctx.fillRect(0, GUTTER, 300, TITLE_FONT_SIZE * 1.8)
+    title.split("\n").forEach(function(line, index){
 
-    ctx.fillStyle = COLOR_RED
-    ctx.fillRect(0, GUTTER, 20, TITLE_FONT_SIZE * 1.8)
+      var x = TITLE_X,
+          y = TITLE_Y + TITLE_FONT_SIZE * TITLE_LINE_HEIGHT * index
 
-    ctx.font = [TITLE_FONT_SIZE + "px",  FONT_FAMILY_SANS_SERIF].join(" ")
-    ctx.fillStyle = COLOR_BLACK
-    ctx.textAlign = "left"
-    ctx.fillText(title, GUTTER + 20, 90)
+      Array.from({ length: 8 }).forEach(function(_, i){
+        ctx.font = TITLE_FONT
+        ctx.strokeStyle = TITLE_STROKE_COLOR
+        ctx.lineWidth = TITLE_STROKE_WIDTH
+        ctx.textAlign = TITLE_TEXT_ALIGN
+        ctx.lineJoin = "round"
+        ctx.strokeText(line, x + i, y + i)
+      })
+
+      ctx.font = TITLE_FONT
+      ctx.fillStyle = TITLE_FONT_COLOR
+      ctx.textAlign = TITLE_TEXT_ALIGN
+      ctx.fillText(line, x, y)
+    })
   }
 
   function renderSubtitle(subtitle) {
-    ctx.fillStyle = COLOR_RED
-    ctx.fillRect(WIDTH - GUTTER - 300, GUTTER, 300, 60)
 
-    ctx.font = [SUBTITLE_FONT_SIZE + "px",  FONT_FAMILY_SANS_SERIF].join(" ")
-    ctx.fillStyle = COLOR_WHITE
-    ctx.textAlign = "right"
-    ctx.fillText(subtitle, WIDTH - GUTTER - 20, 70)
+    var lines = subtitle.split("\n")
+    var width = Math.max.apply(null, lines.map(function(line){
+      return measureTextWidth(SUBTITLE_FONT_FAMILY, SUBTITLE_FONT_WEIGHT, SUBTITLE_FONT_SIZE, line)
+    })) + SUBTITLE_PADDING * 2
+    var height = lines.length * SUBTITLE_FONT_SIZE * SUBTITLE_LINE_HEIGHT + SUBTITLE_PADDING * 2
+
+    var x = WIDTH - GUTTER_X - width
+    var y = GUTTER_Y
+
+    ctx.fillStyle = SUBTITLE_BACKGROUND_COLOR
+    ctx.fillRect(x, y, width, height)
+
+    ctx.font = SUBTITLE_FONT
+    ctx.fillStyle = SUBTITLE_FONT_COLOR
+    ctx.textAlign = SUBTITLE_TEXT_ALIGN
+    lines.forEach(function(line, index){
+      ctx.fillText(line,
+        x + SUBTITLE_PADDING,
+        y + SUBTITLE_PADDING + SUBTITLE_FONT_SIZE + index * SUBTITLE_FONT_SIZE * SUBTITLE_LINE_HEIGHT
+      )
+    })
   }
 
   function renderWords(words) {
-    ctx.fillStyle = "rgba(0,0,0,0.5)"
-    ctx.fillRect(
-      WIDTH * 0.2,
-      HEIGHT - GUTTER - WORDS_FONT_SIZE * 1.4,
-      WIDTH * 0.6,
-      WORDS_FONT_SIZE * 1.4
-    )
+    var lines = words.split("\n")
+    var x = WIDTH / 2
+    var y = HEIGHT - GUTTER_Y - (lines.length - 1) * WORDS_FONT_SIZE * WORDS_LINE_HEIGHT
 
-    ctx.font = [WORDS_FONT_SIZE + "px",  FONT_FAMILY_SANS_SERIF].join(" ")
-    ctx.textAlign = "center"
-    ctx.fillStyle = COLOR_WHITE
-    ctx.fillText(words, WIDTH / 2, HEIGHT - GUTTER - 20)
+    ctx.font = WORDS_FONT
+    ctx.textAlign = WORDS_TEXT_ALIGN
+
+    lines.forEach(function(line, index){
+
+      var lineX = x, lineY = y + index * WORDS_FONT_SIZE * WORDS_LINE_HEIGHT
+
+      ctx.lineWidth = WORDS_OUTER_LINE_WIDTH
+      ctx.strokeStyle = WORDS_OUTER_LINE_COLOR
+      ctx.lineJoin = "round"
+      ctx.strokeText(line, lineX, lineY)
+
+      ctx.lineWidth = WORDS_INNER_LINE_WIDTH
+      ctx.strokeStyle = WORDS_INNER_LINE_COLOR
+      ctx.lineJoin = "round"
+      ctx.strokeText(line, lineX, lineY)
+
+      ctx.fillStyle = WORDS_FONT_COLOR
+      ctx.fillText(line, lineX, lineY)
+    })
   }
 
   function measureTextWidth (fontFamily, fontWeight, fontSize, text) {

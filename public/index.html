@@ -25,12 +25,12 @@
         </div>
       </div>
     </div>
-    <div class="w-64 flex flex-col bg-gray-200 p-2 overflow-auto">
+    <div class="flex flex-col bg-gray-200 p-2 overflow-auto" style="width: 24rem;">
       <div class="bg-white shadow rounded mb-2">
         <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">シーン</div>
         <div class="overflow-auto h-48" id="scene-list">
           <template id="scene-list-item">
-            <button class="border-b w-full text-left border-gray-300 p-2 text-gray-800 text-sm"></button>
+            <button class="border-b w-full text-left border-gray-300 p-2 text-gray-800 text-sm focus:outline-none"></button>
           </template>
         </div>
         <div class="flex justify-end border-t bg-gray-100">
@@ -41,25 +41,37 @@
       <div class="bg-white shadow rounded mb-2">
         <label for="name-input" class="block bg-gray-100 px-2 py-1 text-gray-800 font-bold">名前</label>
         <div class="overflow-auto p-2">
-          <input id="name-input" type="text" class="w-full" placeholder="シーンの名前" />
+          <input id="name-input" type="text" class="
+            w-full p-2 border border-gray-300 text-gray-600 rounded
+            focus:outline-none focus:border-blue-500 focus:text-gray-900
+          " placeholder="シーンの名前" />
         </div>
       </div>
       <div class="bg-white shadow rounded mb-2">
         <label for="title-input" class="block bg-gray-100 px-2 py-1 text-gray-800 font-bold">タイトル</label>
         <div class="overflow-auto p-2">
-          <textarea id="title-input" type="text" class="w-full" placeholder="タイトル" rows="2"></textarea>
+          <textarea id="title-input" type="text" placeholder="タイトル" rows="2" class="
+            w-full p-2 border border-gray-300 text-gray-600 rounded
+            focus:outline-none focus:border-blue-500 focus:text-gray-900
+          "></textarea>
         </div>
       </div>
       <div class="bg-white shadow rounded mb-2">
         <label for="subtitle-input" class="block bg-gray-100 px-2 py-1 text-gray-800 font-bold">サブタイトル</label>
         <div class="overflow-auto p-2">
-          <textarea id="subtitle-input" type="text" class="w-full" placeholder="サブタイトル" rows="2"></textarea>
+          <textarea id="subtitle-input" type="text" placeholder="サブタイトル" rows="2" class="
+            w-full p-2 border border-gray-300 text-gray-600 rounded
+            focus:outline-none focus:border-blue-500 focus:text-gray-900
+          "></textarea>
         </div>
       </div>
       <div class="bg-white shadow rounded mb-2">
         <label for="words-input" class="block bg-gray-100 px-2 py-1 text-gray-800 font-bold">セリフ</label>
         <div class="overflow-auto p-2">
-          <textarea id="words-input" type="text" class="w-full" placeholder="セリフ" rows="2"></textarea>
+          <textarea id="words-input" type="text" placeholder="サブタイトル" rows="2" class="
+            w-full p-2 border border-gray-300 text-gray-600 rounded
+            focus:outline-none focus:border-blue-500 focus:text-gray-900
+          "></textarea>
         </div>
       </div>
       <div class="bg-white shadow rounded mb-2 p-2">
