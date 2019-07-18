@@ -1,0 +1,20 @@
+:root {
+  font-size: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.serif {
+  font-family: 'Noto Serif JP', serif;
+}
+
+.sans {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.bg-plaid {
+  background: linear-gradient(45deg, #CCCCCC 25%, transparent 25%, transparent 75%, #CCCCCC 75%),
+              linear-gradient(45deg, #CCCCCC 25%, transparent 25%, transparent 75%, #CCCCCC 75%);
+  background-color: #FFFFFF;
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+}

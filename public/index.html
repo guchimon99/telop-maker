@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>テロップ・メーカー</title>
+  <meta name="og:title" content="テロップメーカー"/>
+  <meta name="og:description" content="簡単にYouTubeのテロップを作るサービス"/>
+  <meta name="og:image" content="https://telop-maker.firebaseapp.com/assets/img/ogp.png"/>
+  <meta name="twitter:title" content="テロップメーカー"/>
+  <meta name="twitter:site" content="guchimon99"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:description" content="簡単にYouTubeのテロップを作るサービス"/>
+  <meta name="twitter:image" content="https://telop-maker.firebaseapp.com/assets/img/ogp.png"/>
+  <link
+    href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Noto+Serif+JP:400,700&display=swap&subset=japanese"
+    rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="fixed inset-0 overflow-hidden flex flex-row justify-center items-stretch">
+  <div class="flex-grow bg-gray-900 flex justify-center items-center p-5 overflow-auto">
+    <div class="bg-plaid w-full shadow relative" style="padding-top: 56.25%">
+      <div class="absolute inset-0">
+        <canvas class="w-full h-auto" id="canvas" width="1600" height="900"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="w-64 flex flex-col bg-gray-200 p-2 overflow-auto">
+    <div class="bg-white shadow rounded mb-2">
+      <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">
+        シーン
+      </div>
+      <div class="overflow-auto h-48" id="scene-list"></div>
+      <div class="flex justify-end border-t bg-gray-100">
+        <button id="remove-scene-button" class="py-1 px-2 border-l text-gray-600">-</button>
+        <button id="append-scene-button" class="py-1 px-2 border-l text-gray-600">+</button>
+      </div>
+    </div>
+    <div class="bg-white shadow rounded mb-2">
+      <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">
+        名前
+      </div>
+      <div class="overflow-auto p-2">
+        <input id="name-input" type="text" class="w-full"/>
+      </div>
+    </div>
+    <div class="bg-white shadow rounded mb-2">
+      <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">
+        タイトル
+      </div>
+      <div class="overflow-auto p-2">
+        <textarea id="title-input" type="text" class="w-full" placeholder="左上に表示する" rows="2"></textarea>
+      </div>
+    </div>
+    <div class="bg-white shadow rounded mb-2">
+      <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">
+        サブタイトル
+      </div>
+      <div class="overflow-auto p-2">
+        <textarea id="subtitle-input" type="text" class="w-full" placeholder="左上に表示する" rows="2"></textarea>
+      </div>
+    </div>
+    <div class="bg-white shadow rounded mb-2">
+      <div class="bg-gray-100 px-2 py-1 text-gray-800 font-bold">
+        セリフ
+      </div>
+      <div class="overflow-auto p-2">
+        <textarea id="words-input" type="text" class="w-full" placeholder="左上に表示する" rows="2"></textarea>
+      </div>
+    </div>
+    <div class="bg-white shadow rounded mb-2 p-2">
+      <a id="download-button" class="block bg-blue-500 text-white p-2 text-center rounded" href="#" download="シーン1">ダウンロード</a>
+    </div>
+  </div>
+  <template id="scene-list-item">
+    <button class="border-b w-full text-left border-gray-300 p-2 text-gray-800 text-sm"></button>
+  </template>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
