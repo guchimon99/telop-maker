@@ -47,9 +47,7 @@
       WORDS_OUTER_LINE_COLOR = COLOR_WHITE,
       WORDS_INNER_LINE_WIDTH = 10,
       WORDS_INNER_LINE_COLOR = COLOR_RED,
-      WORDS_TEXT_ALIGN = TEXT_ALIGN_CENTER,
-
-      WORDS_FONT_SIZE = 80
+      WORDS_TEXT_ALIGN = TEXT_ALIGN_CENTER
 
   var canvas, ctx, scene, scenes, sceneList, sceneListItemTemplate,
       appendSceneButton, removeSceneButton, downloadButton,
